@@ -3,7 +3,7 @@
   "db": {
     "name": "mckinley",
     "port": "27017",
-    "url": "localhost:27017",
+    "url": "localhost",
     "options": {}
   },
   "port": 3000

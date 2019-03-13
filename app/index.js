@@ -34,7 +34,7 @@ app.use((req, res, callback)=> {
             callback();
         })
         .catch((err)=> {
-            res.status(500).send();
+            res.status(500).send(err);
         });
 });
 
@@ -52,6 +52,19 @@ app.use((req, res, callback)=> {
     callback();
 });
 
+// Sets various headers needed.
+app.use(function (req, res, next) {
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    // Following headers are needed for CORS
+    res.setHeader('access-control-allow-headers', 'Origin, X-Requested-With, Content-Type, Accept, ajax');
+    res.setHeader('access-control-allow-methods', 'POST,HEAD,GET,PUT,DELETE,OPTIONS');
+    res.setHeader('access-control-allow-origin', req.headers.origin);
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-XSS-Protection', 1);
+    res.setHeader('mode', 'block');
+    res.removeHeader("X-Powered-By");
+    next();
+});
 
 require("./config/routes")(app);
 

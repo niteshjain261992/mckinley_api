@@ -8,7 +8,8 @@ module.exports = (router)=> {
 
     router.get('/api/v1/user/info', (req, res)=> {
         const user = req.session.user;
-        res.json({ code: 200, payload: { data: user }});
+        console.log("user*****", user);
+        res.status(200).json({ code: 200, payload: { data: user }});
     });
 
     router.post('/api/v1/user/register', (req, res)=> {
